@@ -22,6 +22,13 @@ RSpec.describe CampaignData, type: :model do
             ]
           )
           c1.save
+          c2 = Campaign.new(
+            name: 'C1',
+            campaign_class: Campaign.campaign_classes[:promotion],
+            start_date: '2019-01-01',
+            end_date: '2019-01-01'
+          )
+          c2.save
 
           expect(subject.count).to eq 1
         end
