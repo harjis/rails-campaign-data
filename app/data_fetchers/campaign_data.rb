@@ -1,5 +1,8 @@
 module CampaignData
-  def self.fetch(start_date, end_date)
-    Campaign.touches_time_range(start_date, end_date).joins(:product_locations)
+  def self.fetch(start_date, end_date, hidden_campaign_classes = [])
+    Campaign
+      .visible(hidden_campaign_classes)
+      .touches_time_range(start_date, end_date)
+      .joins(:product_locations)
   end
 end

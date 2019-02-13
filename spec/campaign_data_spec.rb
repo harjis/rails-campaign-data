@@ -4,7 +4,8 @@ RSpec.describe CampaignData, type: :model do
   describe 'fetch' do
     let(:start_date) {}
     let(:end_date) {}
-    subject { CampaignData.fetch(start_date, end_date) }
+    let(:hidden_campaign_classes) { [] }
+    subject { CampaignData.fetch(start_date, end_date, hidden_campaign_classes) }
     context 'when campaign touches viewing time range' do
       let(:start_date) { '2019-01-01' }
       let(:end_date) { '2019-01-01' }
@@ -23,6 +24,25 @@ RSpec.describe CampaignData, type: :model do
           c1.save
 
           expect(subject.count).to eq 1
+        end
+
+        context 'when campaigns class is hidden' do
+          let(:hidden_campaign_classes) { [1] }
+
+          it 'is not returned' do
+            c1 = Campaign.new(
+              name: 'C1',
+              campaign_class: 1,
+              start_date: '2019-01-01',
+              end_date: '2019-01-01',
+              product_locations: [
+                ProductLocation.new(name: 'PL1')
+              ]
+            )
+            c1.save
+
+            expect(subject.count).to eq 0
+          end
         end
       end
 
