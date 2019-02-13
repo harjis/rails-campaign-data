@@ -14,7 +14,7 @@ RSpec.describe CampaignData, type: :model do
         it 'is returned' do
           c1 = Campaign.new(
             name: 'C1',
-            campaign_class: 1,
+            campaign_class: Campaign.campaign_classes[:promotion],
             start_date: '2019-01-01',
             end_date: '2019-01-01',
             product_locations: [
@@ -27,12 +27,12 @@ RSpec.describe CampaignData, type: :model do
         end
 
         context 'when campaigns class is hidden' do
-          let(:hidden_campaign_classes) { [1] }
+          let(:hidden_campaign_classes) { [Campaign.campaign_classes[:promotion]] }
 
           it 'is not returned' do
             c1 = Campaign.new(
               name: 'C1',
-              campaign_class: 1,
+              campaign_class: Campaign.campaign_classes[:promotion],
               start_date: '2019-01-01',
               end_date: '2019-01-01',
               product_locations: [
@@ -50,7 +50,7 @@ RSpec.describe CampaignData, type: :model do
         it 'is not returned' do
           c1 = Campaign.new(
             name: 'C1',
-            campaign_class: 1,
+            campaign_class: Campaign.campaign_classes[:promotion],
             start_date: '2019-01-01',
             end_date: '2019-01-01',
           )
@@ -69,7 +69,7 @@ RSpec.describe CampaignData, type: :model do
         it 'is not returned' do
           c1 = Campaign.new(
             name: 'C1',
-            campaign_class: 1,
+            campaign_class: Campaign.campaign_classes[:promotion],
             start_date: '2019-01-01',
             end_date: '2019-01-01'
           )
@@ -83,7 +83,7 @@ RSpec.describe CampaignData, type: :model do
         it 'is not returned' do
           c1 = Campaign.new(
             name: 'C1',
-            campaign_class: 1,
+            campaign_class: Campaign.campaign_classes[:promotion],
             start_date: '2019-01-01',
             end_date: '2019-01-01',
             product_locations: [

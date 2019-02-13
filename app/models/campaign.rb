@@ -7,5 +7,7 @@ class Campaign < ApplicationRecord
   scope :touches_time_range, -> (start_date, end_date) do
     where("start_date <= ? AND end_date >= ?", end_date, start_date)
   end
-  scope :visible, -> (hidden_campaign_classes) { where("campaign_class NOT IN (?)", hidden_campaign_classes) unless hidden_campaign_classes.empty? }
+  scope :visible, -> (hidden_campaign_classes) do
+    where("campaign_class NOT IN (?)", hidden_campaign_classes) unless hidden_campaign_classes.empty?
+  end
 end
