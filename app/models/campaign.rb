@@ -10,4 +10,5 @@ class Campaign < ApplicationRecord
   scope :visible, -> (hidden_campaign_classes) do
     where("campaign_class NOT IN (?)", hidden_campaign_classes) unless hidden_campaign_classes.empty?
   end
+  scope :active, -> { joins(:product_locations) }
 end

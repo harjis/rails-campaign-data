@@ -3,6 +3,6 @@ module CampaignData
     Campaign
       .visible(hidden_campaign_classes)
       .touches_time_range(start_date, end_date)
-      .joins(:product_locations)
+      .active
   end
 end
