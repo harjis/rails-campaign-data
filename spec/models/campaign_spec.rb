@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Campaign, type: :model do
-  let(:start_date) { nil }
-  let(:end_date) { nil }
-  let(:params) { { start_date: start_date, end_date: end_date } }
-  subject { Campaign.create(params) }
-
   describe 'star_date and end_date' do
+    let(:start_date) { nil }
+    let(:end_date) { nil }
+    let(:params) { { start_date: start_date, end_date: end_date } }
+    subject { Campaign.create(params) }
+
     context 'without start date and end date' do
       it { is_expected.to be_invalid }
     end
@@ -39,6 +39,16 @@ RSpec.describe Campaign, type: :model do
         let(:end_date) { Date.today }
         it { is_expected.to be_valid }
       end
+    end
+  end
+
+  describe 'touches_time_range' do
+    # Unit test this function properly
+    it 'returns only campaigns which touches the time range' do
+      Campaign.create(name: 'C1', campaign_class: 1, start_date: '2019-01-01', end_date: '2019-01-01')
+      Campaign.create(name: 'C2', campaign_class: 1, start_date: '2019-02-01', end_date: '2019-02-01')
+      campaigns = Campaign.touches_time_range('2019-01-01', '2019-01-01')
+      expect(campaigns.count).to eq 1
     end
   end
 end
