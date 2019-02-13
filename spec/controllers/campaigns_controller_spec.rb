@@ -50,7 +50,11 @@ RSpec.describe CampaignsController, type: :controller do
       }
       get :campaign_data, params: params
 
-      pp response.body
+      # In product tests this should not be done. By default rspec does not even render views because in
+      # controller tests most of the time we are not interested in what gets rendered
+      json = JSON.parse(response.body)
+      expect(json['promotion'].count).to eq(1)
+      expect(json['cannibalization'].count).to eq(0)
     end
   end
 end
