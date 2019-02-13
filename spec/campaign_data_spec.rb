@@ -18,7 +18,8 @@ RSpec.describe CampaignData, type: :model do
             start_date: '2019-01-01',
             end_date: '2019-01-01',
             product_locations: [
-              ProductLocation.new(name: 'PL1')
+              ProductLocation.new(name: 'PL1'),
+              ProductLocation.new(name: 'PL2')
             ]
           )
           c1.save
