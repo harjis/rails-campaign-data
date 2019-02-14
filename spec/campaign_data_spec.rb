@@ -11,7 +11,7 @@ RSpec.describe CampaignData, type: :model do
       let(:end_date) { '2019-01-01' }
 
       context 'when campaign is joined to product location' do
-        it 'is returned' do
+        it 'is selected' do
           c1 = Campaign.new(
             name: 'C1',
             campaign_class: Campaign.campaign_classes[:promotion],
@@ -37,7 +37,7 @@ RSpec.describe CampaignData, type: :model do
         context 'when campaigns class is hidden' do
           let(:hidden_campaign_classes) { [Campaign.campaign_classes[:promotion]] }
 
-          it 'is not returned' do
+          it 'is not selected' do
             c1 = Campaign.new(
               name: 'C1',
               campaign_class: Campaign.campaign_classes[:promotion],
@@ -55,7 +55,7 @@ RSpec.describe CampaignData, type: :model do
       end
 
       context 'when campaign is not joined to product location' do
-        it 'is not returned' do
+        it 'is not selected' do
           c1 = Campaign.new(
             name: 'C1',
             campaign_class: Campaign.campaign_classes[:promotion],
@@ -74,7 +74,7 @@ RSpec.describe CampaignData, type: :model do
       let(:end_date) { '2019-02-01' }
 
       context 'when campaign is not joined to product location' do
-        it 'is not returned' do
+        it 'is not selected' do
           c1 = Campaign.new(
             name: 'C1',
             campaign_class: Campaign.campaign_classes[:promotion],
@@ -88,7 +88,7 @@ RSpec.describe CampaignData, type: :model do
       end
 
       context 'when campaign is joined to product location' do
-        it 'is not returned' do
+        it 'is not selected' do
           c1 = Campaign.new(
             name: 'C1',
             campaign_class: Campaign.campaign_classes[:promotion],
