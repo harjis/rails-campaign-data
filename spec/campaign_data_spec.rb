@@ -18,8 +18,7 @@ RSpec.describe CampaignData, type: :model do
             start_date: '2019-01-01',
             end_date: '2019-01-01',
             product_locations: [
-              ProductLocation.new(name: 'PL1'),
-              ProductLocation.new(name: 'PL2')
+              ProductLocation.new(name: 'PL1')
             ]
           )
           c1.save
@@ -32,6 +31,31 @@ RSpec.describe CampaignData, type: :model do
           c2.save
 
           expect(subject.count).to eq 1
+        end
+
+        context 'when campaign is joined to multiple product locations' do
+          it 'is selected only once' do
+            c1 = Campaign.new(
+              name: 'C1',
+              campaign_class: Campaign.campaign_classes[:promotion],
+              start_date: '2019-01-01',
+              end_date: '2019-01-01',
+              product_locations: [
+                ProductLocation.new(name: 'PL1'),
+                ProductLocation.new(name: 'PL2')
+              ]
+            )
+            c1.save
+            c2 = Campaign.new(
+              name: 'C1',
+              campaign_class: Campaign.campaign_classes[:promotion],
+              start_date: '2019-01-01',
+              end_date: '2019-01-01'
+            )
+            c2.save
+
+            expect(subject.count).to eq 1
+          end
         end
 
         context 'when campaigns class is hidden' do
